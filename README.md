@@ -1,5 +1,6 @@
 Twórcy:
-Gabriel Miś
-Alan Drab
-Andrei Dzhura
-Jakub Sroka
+Gabriel Miś,
+Alan Drab,
+Andrei Dzhura,
+Jakub Sroka,
+Kacper Niebrzydowski,
