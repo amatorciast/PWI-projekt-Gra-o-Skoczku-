@@ -99,27 +99,12 @@ int main() {
     srand(time(NULL));
     enemy_init();
     char order;
-    char tab[8][8];
     while (scanf(" %c", &order)) {
         if (order == 't') {
             enemy_move();
-            for (int i = 0; i < 8; i++) {
-                for (int j = 0; j < 8; j++) {
-                    tab[i][j] = '.';
-                }
-            }
-            for (int i = 0; i < 64; i ++) {
-                if (enemies[i].alive == 1) {
-                    printf("a \n");
-                    tab[enemies[i].curr_x][enemies[i].curr_y] = '0' + enemies[i].figure;
-                }
-            }
-            for (int i = 0; i < 8; i++) {
-                for (int j = 0; j < 8; j++) {
-                    printf("%c ", tab[j][i]);
-                }
-                printf("\n");
-            }
+            
+            set_output(); //teraz mozna testowac i logike przeciwnikow i output
+
         } else if (order == 's') {
             enemy_spawn();
         }

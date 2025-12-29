@@ -1,3 +1,5 @@
+#include <stdbool.h>
+
 #define and &&
 #define or ||
 #define true 1
@@ -56,9 +58,10 @@ void enemy_move();//logika ruszania przeczewnikow
 
 
 //----------------------------------Alan Drab-------------------------------------------
-void set_output();//wypiosywanie
+void set_output();//wypisywanie
 //prośba - typ enemy ma dwa koordynaty - obecne i następne
 //zrób proszę, że te następne się podświetlają jakoś
+//jasne :like:
 //======================================================================================
 
 
