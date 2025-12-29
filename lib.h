@@ -34,6 +34,22 @@ void player_move(int);//logika ruszania gracza
 
 
 //----------------------------------Gabriel Mis-----------------------------------------
+typedef struct {
+    bool alive;
+    int curr_x;
+    int curr_y;
+    int next_x;
+    int next_y;
+    int figure; // 0 pionek
+    // 1 wieza
+    // 2 skoczek
+    // 3 biskup
+    // 4 hetman
+}enemy;
+extern enemy enemies[64];
+void enemy_init();//zapełnienie powyższej tablicy
+void enemy_spawn();//dodawanie przeciwników
+void enemy_death(int indx);//usuwanie przeciwnika
 void enemy_move();//logika ruszania przeczewnikow
 //======================================================================================
 
@@ -41,6 +57,8 @@ void enemy_move();//logika ruszania przeczewnikow
 
 //----------------------------------Alan Drab-------------------------------------------
 void set_output();//wypiosywanie
+//prośba - typ enemy ma dwa koordynaty - obecne i następne
+//zrób proszę, że te następne się podświetlają jakoś
 //======================================================================================
 
 
