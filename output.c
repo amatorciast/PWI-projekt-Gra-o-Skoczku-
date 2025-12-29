@@ -86,7 +86,7 @@ void set_output()
 //jak szybko skoncze - animacja?? wyswietla sie najpierw plansza z samymi figurami, potem dodatkowo gdzie celuja przeciwnicy, a na koniec gdzie moze skoczyc skoczek
 
 
-
+/*
 int main()
 {
     int test;
@@ -98,6 +98,8 @@ int main()
     test=test;
     return 0;
 }
+*/
+
     
 
 Game_info symulowanie_planszy_z_pionkami()

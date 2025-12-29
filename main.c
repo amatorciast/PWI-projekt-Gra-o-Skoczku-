@@ -2,6 +2,8 @@
 #define START_X 0
 #define START_Y 0
 
+Game_info game;
+
 int main(){
     int input;
     game.is_started = false;
