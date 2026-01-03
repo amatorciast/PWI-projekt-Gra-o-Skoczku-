@@ -6,6 +6,7 @@
 enemy enemies[64];
 
 void enemy_init() {
+    srand(time(NULL));
     for (int i = 0; i < 64; i++) {
         enemies[i].alive = 0;
     }
@@ -96,7 +97,6 @@ void enemy_move() {
 
 /* poniżej test i proof of concept, że działa
 int main() {
-    srand(time(NULL));
     enemy_init();
     char order;
     while (scanf(" %c", &order)) {
