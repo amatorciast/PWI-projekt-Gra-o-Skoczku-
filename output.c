@@ -111,8 +111,8 @@ void wsadzanie_przeciwnikow_na_plansze(char pionki[8][8])
             pionki[i][j]=0;
 
     for (int i=0; i<64;i++)
-        if (enemies[i].alive == 1 && enemies[i].curr_x>=0 && enemies[i].curr_y>=0)
-            pionki[enemies[i].curr_x][enemies[i].curr_y]=enemies[i].figure+1;
+        if (game.enemies[i].alive == 1 && game.enemies[i].curr_x>=0 && game.enemies[i].curr_y>=0)
+            pionki[game.enemies[i].curr_x][game.enemies[i].curr_y]=game.enemies[i].figure+1;
 
     return;
 }
@@ -124,8 +124,8 @@ void wsadzanie_ruchu_przeciwnikow(char ataki[8][8])
             ataki[i][j]=0;
 
     for (int i=0; i<64;i++)
-        if (enemies[i].alive == 1 && enemies[i].next_x>=0 && enemies[i].next_y>=0 && enemies[i].next_x<8 && enemies[i].next_y<8)
-            ataki[enemies[i].next_x][enemies[i].next_y]=1;
+        if (game.enemies[i].alive == 1 && game.enemies[i].next_x>=0 && game.enemies[i].next_y>=0 && game.enemies[i].next_x<8 && game.enemies[i].next_y<8)
+            ataki[game.enemies[i].next_x][game.enemies[i].next_y]=1;
 
     return;
 }
