@@ -5,9 +5,23 @@
 #define true 1
 #define false 0
 
+//deklaracja enemy przeniesiona do Game_info
+typedef struct {
+    bool alive;
+    int curr_x;
+    int curr_y;
+    int next_x;
+    int next_y;
+    int figure; // 0 pionek
+    // 1 wieza
+    // 2 skoczek
+    // 3 biskup
+    // 4 hetman
+}enemy;
 
 typedef struct{
     char map[8][8];//plansza gry
+    enemy enemies[64];
     int x, y;//miejsce gracza w map
     int is_started;//flaga dla sprawdzania czy gra sie zaczola
     //0: nie zaczola sie
@@ -29,26 +43,15 @@ int get_input();//zwraca to co wpisał gracz
 
 
 
-//--------------------------------------------------------------------------------------
+//----------------------------------Gabriel Mis----------------------------------------------------
 void player_move(int);//logika ruszania gracza
 //======================================================================================
 
 
 
 //----------------------------------Gabriel Mis-----------------------------------------
-typedef struct {
-    bool alive;
-    int curr_x;
-    int curr_y;
-    int next_x;
-    int next_y;
-    int figure; // 0 pionek
-    // 1 wieza
-    // 2 skoczek
-    // 3 biskup
-    // 4 hetman
-}enemy;
-extern enemy enemies[64];
+
+
 void enemy_init();//zapełnienie powyższej tablicy
 void enemy_spawn();//dodawanie przeciwników
 void enemy_death(int indx);//usuwanie przeciwnika
