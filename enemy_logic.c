@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <time.h>
 
-Game_info game;
+//Game_info game;
 
 void enemy_init() {
     srand(time(NULL));
@@ -96,7 +96,9 @@ void enemy_move() {
 }
 
 //poniżej test i proof of concept, że działa
-//WAŻNE! dla testów odkomentuj deklarację Game_info game; w 6 linijce 
+//WAŻNE! dla testów odkomentuj deklarację Game_info game; w 6
+
+/*
 int main() {
     enemy_init();
     char order;
@@ -110,4 +112,4 @@ int main() {
             enemy_spawn();
         }
     }
-}
+} */
