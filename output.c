@@ -11,14 +11,14 @@
 void windows_dzialaj();
 void wsadzanie_przeciwnikow_na_plansze(char[8][8]);
 void wsadzanie_ruchu_przeciwnikow(char[8][8]);
-void obliczanie_mozliwych_ruchow(int, int, char[8][8]);
+void obliczanie_mozliwych_ruchow(char[8][8]);
 
-//tablica z klockami do budowy planszy:
-char* klocki[27]={
-    "🭗      🭢",
-    "        ",
-    "        ",
-    "🬼      🭇",
+
+char* klocki[32]={ //tablica z klockami do budowy planszy:
+    "🭗 ",
+    "🬼 ",
+    " 🭢",
+    " 🭇",
     "  ",
     "  ",
     "  ",
@@ -27,18 +27,23 @@ char* klocki[27]={
     "🬪🬜",
     "🭁🭌",
     "🭆🭩",
-    "🭵🭪",
+    "🭵🭡",
     "🮭🮬",
     "🭅🭐",
     "🭩🭩",
     "🭨🭪",
-    " ", //[17]
-    "  ⏷  ⏷  ",
+    "🭩🭑",
+    "🭖🭰",
+    " ", //[19]
+    "    ",
+    "⏷  ⏷",
+    "",
+    "    ",
+    "⏶  ⏶",
     "⏵ ",
     " ⏴",
-    "  ⏶  ⏶  ",
     " ",
-    "🮢",//[23]
+    "🮢",//[28]
     "🮠",
     "🮣",
     "🮡",
@@ -57,14 +62,13 @@ char* kolory[6]={ //tablica ze wszystkimi kolorkami:
 
 void set_output()
 {
-    char pionki[8][8];
+    windows_dzialaj();
+    char pionki[8][8]={0};
     wsadzanie_przeciwnikow_na_plansze(pionki);
-    char ataki[8][8];
+    char ataki[8][8]={0};
     wsadzanie_ruchu_przeciwnikow(ataki);
-    char skoczek_x=-1;
-    char skoczek_y=-1;
-    char ruchy [8][8];
-    obliczanie_mozliwych_ruchow(skoczek_x, skoczek_y, ruchy); //poki co nie robi nic :/
+    char ruchy [8][8]={0};
+    obliczanie_mozliwych_ruchow(ruchy);
 
 
     //usuwanie tego co bylo w terminalu
@@ -86,18 +90,15 @@ void set_output()
         {
             if(i%4==0 || i%4==3)
             {
-                printf("%s%s%s" "\x1b[0m", kolory[(i/4+k)%2], kolory[3 -ruchy[i/4][k] ],klocki[i%4 + ruchy[i/4][k]*18]);
+                printf("%s" "%s%s" "%s%s" "%s%s" "\x1b[0m", kolory[(i/4+k)%2], kolory[3], klocki[i%4/2], kolory[2], klocki[i%4 +20 + ruchy[i/4][k]], kolory[3], klocki[i%4/2+2]);
             } 
-            else if(i%4==1) printf("%s" "%s%s%s" "%s%s" "%s%s%s" "\x1b[0m", kolory[(i/4+k)%2], kolory[3 -ruchy[i/4][k] ], klocki[4 + ruchy[i/4][k]*15], klocki[22+ataki[i/4][k]], kolory[pionki[i/4][k]==-1? 2 : 3], klocki[5+0+2*pionki[i/4][k]], kolory[3 -ruchy[i/4][k] ], klocki[22+3*ataki[i/4][k]], klocki[4 + ruchy[i/4][k]*16]);
-            else printf("%s" "%s%s%s" "%s%s" "%s%s%s" "\x1b[0m", kolory[(i/4+k)%2], kolory[3 -ruchy[i/4][k] ], klocki[4 + ruchy[i/4][k]*15], klocki[22+2*ataki[i/4][k]], kolory[pionki[i/4][k]==-1? 2 : 3], klocki[5+1+2*pionki[i/4][k]], kolory[3 -ruchy[i/4][k] ], klocki[22+4*ataki[i/4][k]], klocki[4 + ruchy[i/4][k]*16]);
+            else if(i%4==1) printf("%s" "%s%s%s%s" "%s%s" "%s%s%s%s" "\x1b[0m", kolory[(i/4+k)%2], kolory[2], klocki[4 + ruchy[i/4][k]*21], kolory[3], klocki[27+ataki[i/4][k]], kolory[pionki[i/4][k]==6? 2 : 3], klocki[5+0+2*pionki[i/4][k]], kolory[3], klocki[27+3*ataki[i/4][k]], kolory[2], klocki[4 + ruchy[i/4][k]*22]);
+            else            printf("%s" "%s%s%s%s" "%s%s" "%s%s%s%s" "\x1b[0m", kolory[(i/4+k)%2], kolory[2], klocki[4 + ruchy[i/4][k]*21], kolory[3], klocki[27+2*ataki[i/4][k]], kolory[pionki[i/4][k]==6? 2 : 3], klocki[5+1+2*pionki[i/4][k]], kolory[3], klocki[27+4*ataki[i/4][k]], kolory[2], klocki[4 + ruchy[i/4][k]*22]);
         }
         printf("\n");
     }
 }
 
-
-//rzeczy do zrobienia:
-//uwzględnienie polozenia gracza
 
 //pomysly do uwzglednienia:
 //jak szybko skoncze - animacja?? wyswietla sie najpierw plansza z samymi figurami, potem dodatkowo gdzie celuja przeciwnicy, a na koniec gdzie moze skoczyc skoczek
@@ -106,23 +107,16 @@ void set_output()
 //funkcje pomocnicze:
 void wsadzanie_przeciwnikow_na_plansze(char pionki[8][8])
 {
-    for (int i=0; i<8;i++)
-        for (int j=0; j<8;j++)
-            pionki[i][j]=0;
-
     for (int i=0; i<64;i++)
         if (game.enemies[i].alive == 1 && game.enemies[i].curr_x>=0 && game.enemies[i].curr_y>=0)
             pionki[game.enemies[i].curr_x][game.enemies[i].curr_y]=game.enemies[i].figure+1;
 
+    pionki[game.x][game.y]=6; //wsadzenie gracza
     return;
 }
 
 void wsadzanie_ruchu_przeciwnikow(char ataki[8][8])
 {
-    for (int i=0; i<8;i++)
-        for (int j=0; j<8;j++)
-            ataki[i][j]=0;
-
     for (int i=0; i<64;i++)
         if (game.enemies[i].alive == 1 && game.enemies[i].next_x>=0 && game.enemies[i].next_y>=0 && game.enemies[i].next_x<8 && game.enemies[i].next_y<8)
             ataki[game.enemies[i].next_x][game.enemies[i].next_y]=1;
@@ -130,22 +124,18 @@ void wsadzanie_ruchu_przeciwnikow(char ataki[8][8])
     return;
 }
     
-void obliczanie_mozliwych_ruchow(int x, int y, char skoczek[8][8])
+void obliczanie_mozliwych_ruchow(char skoczek[8][8])
 {
-    for (int i=0; i<8;i++)
-        for (int j=0;j<8;j++)
-            skoczek[i][j]=0;
-
-    if (x==-1) return;
-    if (x+2<8 && y+1<8) skoczek[x+2][y+1]=1;
-    if (x+2<8 && y-1>-1) skoczek[x+2][y-1]=1;
-    if (x-2>-1 && y+1<8) skoczek[x-2][y+1]=1;
-    if (x-2>-1 && y-1>-1) skoczek[x-2][y-1]=1;
-    if (x+1<8 && y+2<8) skoczek[x+1][y+2]=1;
-    if (x+1<8 && y-2>-1) skoczek[x+1][y-2]=1;
-    if (x-1>-1 && y+2<8) skoczek[x-1][y+2]=1;
-    if (x-1>-1 && y-2>-1) skoczek[x-1][y-2]=1;
-    skoczek[x][y]=1;
+    if (game.x==-1) return;
+    if (game.x+2<8 && game.y+1<8) skoczek[game.x+2][game.y+1]=1;
+    if (game.x+2<8 && game.y-1>-1) skoczek[game.x+2][game.y-1]=1;
+    if (game.x-2>-1 && game.y+1<8) skoczek[game.x-2][game.y+1]=1;
+    if (game.x-2>-1 && game.y-1>-1) skoczek[game.x-2][game.y-1]=1;
+    if (game.x+1<8 && game.y+2<8) skoczek[game.x+1][game.y+2]=1;
+    if (game.x+1<8 && game.y-2>-1) skoczek[game.x+1][game.y-2]=1;
+    if (game.x-1>-1 && game.y+2<8) skoczek[game.x-1][game.y+2]=1;
+    if (game.x-1>-1 && game.y-2>-1) skoczek[game.x-1][game.y-2]=1;
+    skoczek[game.x][game.y]=1;
     return;
 }
 
@@ -159,7 +149,7 @@ void windows_dzialaj()
     HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
     DWORD dwMode = 0;
     GetConsoleMode(hOut, &dwMode);
-    dwMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+    dwMode |= 0x0004;
     SetConsoleMode(hOut, dwMode);
 #endif
 }
