@@ -1,7 +1,7 @@
 #include "lib.h"
 #include <stdio.h>
 
-//Game_info game;
+Game_info game;
 
 void player_move(int direction) {
     switch (direction) {
@@ -58,12 +58,12 @@ void player_move(int direction) {
 
 
 //WAŻNE! dla testów odkomentuj Game_info game; w 4 linijce
-/*
+
 int main() {
     game.x = 3;
     game.y = 3;
-    int tab[8][8];
     int d;
+    /*int tab[8][8];
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j ++) {
             tab[i][j] = '.';
@@ -75,26 +75,29 @@ int main() {
             printf("%c ", tab[i][j]);
         }
         printf("\n");
-    }
+    }*/
+
+    set_output();
 
     while (1) {
         scanf(" %d", &d);
-        for (int i = 0; i < 8; i++) {
+        /*for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j ++) {
                 tab[i][j] = '.';
             }
-        }
+        }*/
         player_move(d);
-        tab[game.y][game.x] = 'P';
+        /*tab[game.y][game.x] = 'P';
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j ++) {
                 printf("%c ", tab[i][j]);
             }
             printf("\n");
-        }
+        }*/
+        set_output();
 
     }
     
-*/
+
 }
