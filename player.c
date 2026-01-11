@@ -1,7 +1,6 @@
 #include "lib.h"
 #include <stdio.h>
 
-Game_info game;
 
 void player_move(int direction) {
     switch (direction) {
@@ -54,16 +53,22 @@ void player_move(int direction) {
         }
         break;
     }
+
+    for (int i=0; i < 64; i++){
+        if (game.enemies[i].alive == 1  &&  game.enemies[i].curr_x == game.x  &&  game.enemies[i].curr_y == game.y)
+            enemy_death(i);
+            // i moznaby doliczyc punkty do score w tym miejscu moze?
+    }
 }
 
 
 //WAŻNE! dla testów odkomentuj Game_info game; w 4 linijce
-
+/*
 int main() {
     game.x = 3;
     game.y = 3;
     int d;
-    /*int tab[8][8];
+    int tab[8][8];
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j ++) {
             tab[i][j] = '.';
@@ -76,18 +81,18 @@ int main() {
         }
         printf("\n");
     }*/
-
+    /*
     set_output();
 
     while (1) {
         scanf(" %d", &d);
-        /*for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j ++) {
                 tab[i][j] = '.';
             }
-        }*/
-        player_move(d);
-        /*tab[game.y][game.x] = 'P';
+        }
+        //player_move(d);
+        tab[game.y][game.x] = 'P';
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j ++) {
@@ -95,9 +100,9 @@ int main() {
             }
             printf("\n");
         }*/
-        set_output();
+        //set_output();
 
-    }
+    //}
     
 
-}
+//}
