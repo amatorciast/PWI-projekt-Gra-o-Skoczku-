@@ -1,8 +1,10 @@
 #ifdef _WIN32
     #include <windows.h>
+    #define sleep(ms) Sleep(ms*1000)
 #else
     #include <sys/ioctl.h>
     #include <unistd.h>
+    #define sleep(ms) sleep(ms)
 #endif
 
 #include <stdio.h>
@@ -97,6 +99,7 @@ void set_output()
         }
         printf("\n");
     }
+    sleep(1);
 }
 
 
