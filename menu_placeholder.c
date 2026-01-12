@@ -42,3 +42,37 @@ int menu() {
     //działa tylko 0 i 4 - reszta to nie moja działka
     
 }
+
+void game_reset() {
+    for (int i= 0; i < 64; i ++) {
+        enemy_death(i);
+    }
+    game.x = 0;
+    game.y = 0;
+    game.is_started = 0;
+    game.score = 0;
+    game.since_last_enemy = 0;
+    game.difficulty = 0;
+}
+
+void zgon() {
+    printf("Doświadczasz śmierci z wynikiem %d.\nWybierz opcję:\n0: zagraj ponownie\n1: menu\n2: zakończ\n", game.score);
+    game_reset();
+    int order;
+    while (1) {
+        if (scanf(" %d", &order)) {
+            switch(order) {
+                case 0:
+                return;
+                break;
+                case 1:
+                menu();
+                break;
+                case 2:
+                end_game();
+                break;
+            }
+        }
+        }
+    }
+
