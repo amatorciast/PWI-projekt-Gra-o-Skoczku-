@@ -16,6 +16,11 @@ void print_score() {
     return;
 }
 
+void print_score_quick() {
+    printf("Score: %d\n", game.score);
+    return;
+}
+
 int pause() {
     printf("Wybierz opcję:\n0: resume\n1: menu\n");
     int order;

@@ -32,6 +32,15 @@ void enemy_spawn() {
     }
 }
 
+void enemy_deside_if_to_bother_living(int score) {
+    game.since_last_enemy++;
+    game.difficulty += 1;
+    
+    if (rand()%100 < game.difficulty || game.since_last_enemy >= 5) enemy_spawn();
+    if (game.difficulty >= 200) enemy_spawn();
+    if (game.difficulty >= 300) enemy_spawn();
+}
+
 void enemy_death(int indx) {
     game.enemies[indx].alive = 0;
 }
