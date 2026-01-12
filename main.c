@@ -22,12 +22,11 @@ int main(){
             set_output();
             enemy_move();
             set_output();
-        }else if(input=='p'){
+        }else if(input==9){
+            game.is_started = false;
             if(pause()){
-                while(!game.is_started){
-                    menu_check();
-                }
-            }
+                menu_check();
+            } else game.is_started = true;
         }
     }
 
