@@ -8,6 +8,6 @@ void end_game(){
 
 void start_game(){
     if(game.is_started == false){
-        game.is_started == true;
+        game.is_started = true;
     }
 }

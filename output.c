@@ -99,7 +99,7 @@ void set_output()
         }
         printf("\n");
     }
-    sleep(1);
+    //sleep(1);
 }
 
 

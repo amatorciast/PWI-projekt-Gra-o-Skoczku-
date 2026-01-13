@@ -32,8 +32,36 @@ void enemy_spawn() {
     }
 }
 
+void enemy_deside_if_to_bother_living(int score) {
+    game.since_last_enemy++;
+    game.difficulty += 1;
+    
+    if (rand()%100 < game.difficulty || game.since_last_enemy >= 5) enemy_spawn();
+    if (game.difficulty >= 200) enemy_spawn();
+    if (game.difficulty >= 300) enemy_spawn();
+}
+
 void enemy_death(int indx) {
     game.enemies[indx].alive = 0;
+}
+
+void check_for_death() {
+    for (int i = 0; i < 64; i ++) {
+        if (game.enemies[i].alive) {
+            if (game.enemies[i].curr_x == game.x && game.enemies[i].curr_y == game.y) {
+                zgon();
+                return;
+            }
+            for (int j = 0; j < 64; j ++) {
+                if (game.enemies[j].alive && j != i) {
+                    if (game.enemies[j].curr_x == game.enemies[i].curr_x && game.enemies[j].curr_y == game.enemies[i].curr_y) {
+                        enemy_death(j);
+                    }
+                }
+            }
+        }
+        
+    }
 }
 
 void enemy_move() {

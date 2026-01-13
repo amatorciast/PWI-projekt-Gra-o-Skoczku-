@@ -27,6 +27,9 @@ typedef struct{
     //0: nie zaczola sie
     //1: zaczola sie
     //2: pause
+    int score;
+    int since_last_enemy;
+    int difficulty;
 }Game_info;
 
 extern Game_info game;
@@ -44,15 +47,21 @@ int get_input();//zwraca to co wpisał gracz
 
 
 //----------------------------------Gabriel Mis----------------------------------------------------
-void player_move(int);//logika ruszania gracza
+void player_move(int);//logika ruszania gracza, w player.c
+
+//poniższe w menu_placeholder.c
+void print_score_quick();//szybkie wypisanie score w trakcie działania gry;
+void zgon();//menu śmierci
+void game_reset();//resetuje stan game
 //======================================================================================
 
 
 
 //----------------------------------Gabriel Mis-----------------------------------------
-
-
+//poniższe w enemy_logic.c
+void check_for_death();
 void enemy_init();//zapełnienie powyższej tablicy
+void enemy_deside_if_to_bother_living(int);//decydowanie czy zespawnić przeciwnika
 void enemy_spawn();//dodawanie przeciwników
 void enemy_death(int indx);//usuwanie przeciwnika
 void enemy_move();//logika ruszania przeczewnikow
