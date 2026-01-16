@@ -8,9 +8,9 @@ void menu_check(){
 
             case 1:
             if(game.is_started){
-                save(game);
+                save(&game);
             }else{
-                save_error();
+                save_error(0);
             }
             break;
 

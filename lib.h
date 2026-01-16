@@ -90,8 +90,8 @@ int menu();//podaje dostep dla uzytkowmika do funkcyj:
 //3: wypisuje score
 //4: wyjscie
 
-void save(Game_info);//zapisuje gre
-void save_error();//obsluga bledu gdy chcemy zapisc gre ktorej nie ma
+void save(Game_info*);//zapisuje gre
+void save_error(int);//obsluga bledów podczas zapisywania gry
 Game_info load();//zwraca informacje o gre
 //======================================================================================
 

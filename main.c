@@ -33,10 +33,10 @@ int main(){
             set_output();
             print_score_quick();
         }else if(input==9){
-            game.is_started = false;
+            //game.is_started = false;
             if(pause()){
                 menu_check();
-            } else game.is_started = true;
+            } //else game.is_started = true;
         }
     }
 
