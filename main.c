@@ -19,15 +19,19 @@ int main(){
         print_score_quick();
         //Wykonanie ruchu gracza, a następnie przeciwników
         if(input <= 8 && input>=0){
-            game.score++;
-            player_move(input);
-            set_output();
-            print_score_quick();
-            enemy_move();
-            check_for_death();
-            enemy_deside_if_to_bother_living(game.score);
-            set_output();
-            print_score_quick();
+            if(player_move(input) == 1){
+                game.score++;
+                set_output();
+                print_score_quick();
+                enemy_move();
+                check_for_death();
+                enemy_deside_if_to_bother_living(game.score);
+                set_output();
+                print_score_quick();
+            }
+            else{
+                input_error();
+            }
         }else if(input==9){
             pause();
         }

@@ -34,6 +34,7 @@ extern Game_info game;
 int get_input();//zwraca to co wpisał gracz
 //0-8: osiem standardowych ruchów skoczka + zostanie w miejscu
 //9: pauza
+void input_error();//obsługuje sytuację, w której gracz próbuje wyjść poza planszę
 //======================================================================================
 
 
@@ -48,7 +49,7 @@ void load_error(int);//obsluga bledów podczas wczytywania gry
 
 
 //----------------------------------Gabriel Mis-----------------------------------------
-void player_move(int);//logika ruszania gracza, w player.c
+bool player_move(int);//logika ruszania gracza, w player.c
 
 //poniższe w menu_placeholder.c
 void print_score_quick();//szybkie wypisanie score w trakcie działania gry;

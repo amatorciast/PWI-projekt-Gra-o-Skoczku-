@@ -11,3 +11,12 @@ int get_input(){
     }
     return -1; //nieprawidłowy input
 }
+
+void input_error(){
+    printf("Nie możesz wyjść poza planszę\n");
+    printf("wpisz dowolny klawisz aby kontynuować i wprowadzić prawidłowy ruch\n");
+    char order;
+    while(true) {
+        if (scanf(" %c", &order)) break;
+    }
+}
