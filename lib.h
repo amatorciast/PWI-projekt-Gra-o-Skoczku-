@@ -92,7 +92,8 @@ int menu();//podaje dostep dla uzytkowmika do funkcyj:
 
 void save(Game_info*);//zapisuje gre
 void save_error(int);//obsluga bledów podczas zapisywania gry
-Game_info load();//zwraca informacje o gre
+int load();//zwraca informacje o grze
+void load_error(int);//obsluga bledów podczas wczytywania gry
 //======================================================================================
 
 

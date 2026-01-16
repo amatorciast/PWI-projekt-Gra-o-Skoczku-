@@ -29,7 +29,7 @@ void save(Game_info* game) {
     fprintf(file, "%d %d %d %d %d %d \n", game->x, game->y, game->is_started, game->score, game->since_last_enemy, game->difficulty);
 
     fclose(file);
-    printf("Gra zostałą zapisana.\n");
+    printf("Gra zostałą zapisana do pliku %s.\n", file_name);
     printf("wpisz dowolny klawisz aby kontynuować do trwającej gry\n");
     char order;
     while (1) {
@@ -49,10 +49,54 @@ void save_error(int error_type){
     }
 }
 
-Game_info load() {
-    Game_info dummy;
-    dummy.is_started = 0;
-    return dummy;
+int load(Game_info* game) {
+    printf("Podaj nazwę pliku, z którego chcesz wczytać stan gry:\n");
+    char file_name[100];
+    scanf(" %64s", file_name);
+    strcat(file_name, ".txt");
+
+    FILE *file = fopen(file_name, "r");
+    if (file == NULL){
+        load_error(1);
+        return 0;
+    }
+    // wczytywanie map
+    for(int i = 0; i < 8; i++){
+        for(int j = 0; j < 8; j++){
+            if(fscanf(file, " %c", &game->map[i][j]) != 1){
+                fclose(file);
+                load_error(0);
+                return 0;
+            }
+        }
+    }
+    // wczytywanie enemies
+    for(int i = 0; i < 64; i++){
+        enemy* e = &game->enemies[i];
+        fscanf(file, "%d %d %d %d %d %d", &e->alive, &e->curr_x, &e->curr_y, &e->next_x, &e->next_y, &e->figure);
+    }
+    // wczytywanie x, y; is_started; score; since_last_enemy; difficulty
+    fscanf(file, "%d %d %d %d %d %d", &game->x, &game->y, &game->is_started, &game->score, &game->since_last_enemy, &game->difficulty);
+
+    fclose(file);
+    printf("Gra zostala pomyślnie wczytana z pliku %s.\n", file_name);
+    printf("wpisz dowolny klawisz aby kontynuować do wczytanej gry\n");
+    char order;
+    while (1) {
+        if (scanf(" %c", &order)) return 1;
+    }
+}
+
+void load_error(int error_type){
+    // 0 - błąd podczas wczytywania pliku
+    // 1 - błąd otwarcia pliku
+    if(error_type) printf("Błąd otwarcia pliku do wczytania\n");
+    else printf("Błąd podczas wczytywania zawartości pliku\n");
+    printf("wpisz dowolny klawisz aby kontynuować do poprzedniego widoku\n");
+    char order;
+    while (1) {
+        if (scanf(" %c", &order)) return;
+    }
 }
 
 void print_score() {

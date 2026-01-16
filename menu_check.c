@@ -15,7 +15,7 @@ void menu_check(){
             break;
 
             case 2:
-            game = load();
+            load(&game);
             break;
             
             case 3:
