@@ -44,6 +44,8 @@ void save(Game_info*);//zapisuję gre do pliku tekstowego
 void save_error(int);//obsługa bledów podczas zapisywania gry
 int load();//wczytuje informacje o grze z pliku teksowego
 void load_error(int);//obsluga bledów podczas wczytywania gry
+
+void check_for_death_realization();//poprawnie wykonuje check_for_death, żeby w main było ładnie
 //======================================================================================
 
 
@@ -53,7 +55,9 @@ bool player_move(int);//logika ruszania gracza, w player.c
 
 //poniższe w menu_placeholder.c
 void print_score_quick();//szybkie wypisanie score w trakcie działania gry;
-void zgon();//menu śmierci
+int zgon();//zwraca wybór gracza z ekranu śmierci
+//0: zagraj ponownie
+//1: menu
 void game_reset();//resetuje stan game
 //======================================================================================
 
@@ -61,7 +65,7 @@ void game_reset();//resetuje stan game
 
 //----------------------------------Gabriel Mis-----------------------------------------
 //poniższe w enemy_logic.c
-void check_for_death();
+int check_for_death();//jeżeli gracz nie umarł to zwraca 0, a w przeciwnym przypadku wynik zgon()
 void enemy_init();//zapełnienie powyższej tablicy
 void enemy_deside_if_to_bother_living(int);//decydowanie czy zespawnić przeciwnika
 void enemy_spawn();//dodawanie przeciwników

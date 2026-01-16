@@ -24,7 +24,7 @@ void save(Game_info* game) {
     printf("Gra zostałą zapisana do pliku %s.\n", file_name);
     printf("wpisz dowolny klawisz aby kontynuować do trwającej gry\n");
     char order;
-    while (1) {
+    while(true) {
         if (scanf(" %c", &order)) return;
     }
 }
@@ -34,9 +34,9 @@ void save_error(int error_type){
     // 1 - błąd otwarcia pliku
     if(error_type == 1) printf("Błąd otwarcia pliku do zapisu\n");
     else printf("Nie ma rozpoczętej gry do zapisania\n");
-    printf("wpisz dowolny klawisz aby kontynuować do pustego menu\n");
+    printf("wpisz dowolny klawisz aby kontynuować do poprzedniego widoku\n");
     char order;
-    while (1) {
+    while(true) {
         if (scanf(" %c", &order)) return;
     }
 }
@@ -64,7 +64,7 @@ int load(Game_info* game) {
     printf("Gra zostala pomyślnie wczytana z pliku %s.\n", file_name);
     printf("wpisz dowolny klawisz aby kontynuować do wczytanej gry\n");
     char order;
-    while (1) {
+    while(true) {
         if (scanf(" %c", &order)) return 1;
     }
 }
@@ -76,7 +76,7 @@ void load_error(int error_type){
     else printf("Błąd podczas wczytywania zawartości pliku\n");
     printf("wpisz dowolny klawisz aby kontynuować do poprzedniego widoku\n");
     char order;
-    while (1) {
+    while(true) {
         if (scanf(" %c", &order)) return;
     }
 }
@@ -93,7 +93,7 @@ void print_score_quick() {
 void pause() {
     printf("Wybierz opcję:\n0: resume\n1: menu\n");
     int order;
-    while(1) {
+    while(true) {
         if (scanf(" %d", &order)){
             if (order == 0)  return;
             else if (order == 1){
@@ -115,7 +115,7 @@ int menu() {
     printf("\e[1;1H\e[2J\e[3J");
     printf("Wybierz opcję:\n0: start\n1: zapisz\n2: wczytaj\n3: wypisz wynik\n4: zakończ\n");
     int order;
-    while(1) {
+    while(true) {
         if (scanf(" %d", &order)){
             if (order == 0 || order == 1 || order == 2 || order == 3 || order == 4) return order;
             else printf("Niepoprawna liczba, wybierz liczbę od 0 do 4: ");
@@ -139,28 +139,15 @@ void game_reset() {
     game.difficulty = 0;
 }
 
-void zgon() {
+int zgon() {
     printf("Doświadczasz śmierci z wynikiem %d.\nWybierz opcję:\n0: zagraj ponownie\n1: menu\n2: zakończ\n", game.score);
     game_reset();
     int order;
-    while (1) {
+    while(true) {
         if (scanf(" %d", &order)) {
-            switch(order) {
-                case 0:
-                return;
-                break;
-
-                case 1:
-                menu();
-                break;
-
-                case 2:
-                end_game();
-                break; 
-
-                default:
-                printf("Niepoprawna liczba, wybierz 0, 1 lub 2: ");
-            }
+            if(order == 0 || order == 1) return order;
+            else if(order == 2) end_game();
+            else printf("Niepoprawna liczba, wybierz 0, 1 lub 2: ");
         } else{
             printf("Nie wprowadziłeś liczby, wybierz 0, 1 lub 2: ");
             //Jeśli wejście nie jest liczbą to trzeba wyczyścić bufor, bo scanf ciągle próbuje wczytać inta, ciągle mu się to nie udaje, bo w buforze jest inny znak i program utyka w miejscu

@@ -43,12 +43,11 @@ void enemy_deside_if_to_bother_living(int score) {
     if (game.difficulty >= 300) enemy_spawn();
 }
 
-void check_for_death() {
+int check_for_death() {
     for (int i = 0; i < 64; i ++) {
         if (game.enemies[i].alive == 1) {
             if (game.enemies[i].curr_x == game.x && game.enemies[i].curr_y == game.y) {
-                zgon();
-                return;
+                return zgon();
             }
             for (int j = 0; j < 64; j ++) {
                 if (game.enemies[j].alive && j != i) {
@@ -60,6 +59,16 @@ void check_for_death() {
         }
         
     }
+    return 0;
+}
+
+void check_for_death_realization(){
+    if(check_for_death() == 1) menu_check();
+    //Jeżeli check_for_death == 1 to:
+    //-gracz umarł i w ekranie śmierci wybrał "menu"
+    //W przeciwnym wypadku:
+    //-gracz nie umarł i gra toczy się dalej
+    //-gracz umarł, ale wybrał "zagraj_ponownie", więc ponieważ gra została zresetowana to nie muszę nic robić
 }
 
 void enemy_move() {

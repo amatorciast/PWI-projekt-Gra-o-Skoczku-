@@ -24,7 +24,7 @@ int main(){
                 set_output();
                 print_score_quick();
                 enemy_move();
-                check_for_death();
+                check_for_death_realization();
                 enemy_deside_if_to_bother_living(game.score);
                 set_output();
                 print_score_quick();
