@@ -12,14 +12,6 @@ void save(Game_info* game) {
     if (file == NULL){
         save_error(1); 
     }
-
-    // zapisywanie map
-    for(int i = 0; i < 8; i++){
-        for(int j = 0; j < 8; j++){
-            fprintf(file, "%c ", game->map[i][j]);
-        }
-        fprintf(file, "\n");
-    }
     // zapisywanie enemies
     for(int i = 0; i < 64; i++){
         enemy e = game->enemies[i];
@@ -40,7 +32,7 @@ void save(Game_info* game) {
 void save_error(int error_type){
     // 0 - is_started == 0
     // 1 - błąd otwarcia pliku
-    if(error_type) printf("Błąd otwarcia pliku do zapisu\n");
+    if(error_type == 1) printf("Błąd otwarcia pliku do zapisu\n");
     else printf("Nie ma rozpoczętej gry do zapisania\n");
     printf("wpisz dowolny klawisz aby kontynuować do pustego menu\n");
     char order;
@@ -59,16 +51,6 @@ int load(Game_info* game) {
     if (file == NULL){
         load_error(1);
         return 0;
-    }
-    // wczytywanie map
-    for(int i = 0; i < 8; i++){
-        for(int j = 0; j < 8; j++){
-            if(fscanf(file, " %c", &game->map[i][j]) != 1){
-                fclose(file);
-                load_error(0);
-                return 0;
-            }
-        }
     }
     // wczytywanie enemies
     for(int i = 0; i < 64; i++){
@@ -90,7 +72,7 @@ int load(Game_info* game) {
 void load_error(int error_type){
     // 0 - błąd podczas wczytywania pliku
     // 1 - błąd otwarcia pliku
-    if(error_type) printf("Błąd otwarcia pliku do wczytania\n");
+    if(error_type == 1) printf("Błąd podczas otwierania pliku do wczytania. Najprawdopodobniej plik z podaną nazwą nie istnieje\n");
     else printf("Błąd podczas wczytywania zawartości pliku\n");
     printf("wpisz dowolny klawisz aby kontynuować do poprzedniego widoku\n");
     char order;
@@ -108,14 +90,25 @@ void print_score_quick() {
     return;
 }
 
-int pause() {
+void pause() {
     printf("Wybierz opcję:\n0: resume\n1: menu\n");
     int order;
-    while (1) {
-        if (scanf(" %d", &order) && (order == 0 || order == 1)) return order;
+    while(1) {
+        if (scanf(" %d", &order)){
+            if (order == 0)  return;
+            else if (order == 1){
+                menu_check();
+                return;
+            }
+            else printf("Niepoprawna liczba, wybierz 0 lub 1: ");
+        } else{
+            printf("Nie wprowadziłeś liczby, wybierz 0 lub 1: ");
+            //Jeśli wejście nie jest liczbą to trzeba wyczyścić bufor, bo scanf ciągle próbuje wczytać inta, ciągle mu się to nie udaje, bo w buforze jest inny znak i program utyka w miejscu
+            while (getchar() != '\n');
+        }
     }
-    return -1;
 
+    return;
 }
 
 int menu() {
@@ -123,17 +116,21 @@ int menu() {
     printf("Wybierz opcję:\n0: start\n1: zapisz\n2: wczytaj\n3: wypisz wynik\n4: zakończ\n");
     int order;
     while(1) {
-        if (scanf(" %d", &order) && (order == 0 || order == 1 || order == 2 || order == 3 || order == 4)) return order;
+        if (scanf(" %d", &order)){
+            if (order == 0 || order == 1 || order == 2 || order == 3 || order == 4) return order;
+            else printf("Niepoprawna liczba, wybierz liczbę od 0 do 4: ");
+        } else{
+            printf("Nie wprowadziłeś liczby, wybierz liczbę od 0 do 4: ");
+            //Jeśli wejście nie jest liczbą to trzeba wyczyścić bufor, bo scanf ciągle próbuje wczytać inta, ciągle mu się to nie udaje, bo w buforze jest inny znak i program utyka w miejscu
+            while (getchar() != '\n');
+        }
     }
     return -1;
-    //działa tylko 0 i 4 - reszta to nie moja działka
-    
+    //nie działa tylko 3
 }
 
 void game_reset() {
-    for (int i= 0; i < 64; i ++) {
-        enemy_death(i);
-    }
+    enemy_init();
     game.x = 0;
     game.y = 0;
     game.is_started = 0;
@@ -152,14 +149,23 @@ void zgon() {
                 case 0:
                 return;
                 break;
+
                 case 1:
                 menu();
                 break;
+
                 case 2:
                 end_game();
-                break;
+                break; 
+
+                default:
+                printf("Niepoprawna liczba, wybierz 0, 1 lub 2: ");
             }
-        }
+        } else{
+            printf("Nie wprowadziłeś liczby, wybierz 0, 1 lub 2: ");
+            //Jeśli wejście nie jest liczbą to trzeba wyczyścić bufor, bo scanf ciągle próbuje wczytać inta, ciągle mu się to nie udaje, bo w buforze jest inny znak i program utyka w miejscu
+            while (getchar() != '\n');
         }
     }
+}
 

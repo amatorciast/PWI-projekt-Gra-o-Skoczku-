@@ -1,44 +1,36 @@
 #include <stdbool.h>
 
-#define and &&
-#define or ||
-#define true 1
-#define false 0
-
-//deklaracja enemy przeniesiona do Game_info
+//deklaracja struktury enemy
 typedef struct {
     bool alive;
     int curr_x;
     int curr_y;
     int next_x;
     int next_y;
-    int figure; // 0 pionek
+    int figure;
+    // 0 pionek
     // 1 wieza
     // 2 skoczek
     // 3 biskup
     // 4 hetman
 }enemy;
 
+//deklaracja struktury Game_info
 typedef struct{
-    char map[8][8];//plansza gry
-    enemy enemies[64];
-    int x, y;//miejsce gracza w map
-    int is_started;//flaga dla sprawdzania czy gra sie zaczola
-    //0: nie zaczola sie
-    //1: zaczola sie
-    //2: pause
-    int score;
-    int since_last_enemy;
-    int difficulty;
+    enemy enemies[64]; //tablica z danymi o przeciwnikach
+    int x, y; //pozycja gracza na planszy
+    int is_started; //flaga mówiąca czy gra sie zaczęła czy nie
+    //0: nie zaczęła się
+    //1: zaczęła się
+    int score; //wynik gracza
+    int since_last_enemy; //licznik rund od ostatniego pojawienia się nowego przeciwnika
+    int difficulty; // poziom trudności rosnący wraz z liczbą przeżytych rund
 }Game_info;
 
 extern Game_info game;
 
 
-
-
 //------------------------------------Jakub Sroka---------------------------------------
-void set_terminal();//ustawienie terminalu
 int get_input();//zwraca to co wpisał gracz
 //0-8: osiem standardowych ruchów skoczka + zostanie w miejscu
 //9: pauza
@@ -46,7 +38,16 @@ int get_input();//zwraca to co wpisał gracz
 
 
 
-//----------------------------------Gabriel Mis----------------------------------------------------
+//------------------------------------Jakub Sroka---------------------------------------
+void save(Game_info*);//zapisuję gre do pliku tekstowego
+void save_error(int);//obsługa bledów podczas zapisywania gry
+int load();//wczytuje informacje o grze z pliku teksowego
+void load_error(int);//obsluga bledów podczas wczytywania gry
+//======================================================================================
+
+
+
+//----------------------------------Gabriel Mis-----------------------------------------
 void player_move(int);//logika ruszania gracza, w player.c
 
 //poniższe w menu_placeholder.c
@@ -70,18 +71,19 @@ void enemy_move();//logika ruszania przeczewnikow
 
 
 //----------------------------------Alan Drab-------------------------------------------
-void set_output();//wypisywanie
-//prośba - typ enemy ma dwa koordynaty - obecne i następne
-//zrób proszę, że te następne się podświetlają jakoś
-//jasne :like:
+void set_output();//wypisuje planszę do gry wraz z zawartością
+void windows_dzialaj();
+void wsadzanie_przeciwnikow_na_plansze(char[8][8]);
+void wsadzanie_ruchu_przeciwnikow(char[8][8]);
+void obliczanie_mozliwych_ruchow(char[8][8]);
 //======================================================================================
 
 
 
 //----------------------------Kacper Niebrzydowski--------------------------------------
-int pause();//podaje dostep do przejscia do:
-//0: zwrot do gry
-//1: menu
+void pause();//zatrzymuje gre i można
+//0: wznowić grę
+//1: przejść do menu
 
 int menu();//podaje dostep dla uzytkowmika do funkcyj:
 //0: rozpoczac nowa gre
@@ -89,11 +91,6 @@ int menu();//podaje dostep dla uzytkowmika do funkcyj:
 //2: load
 //3: wypisuje score
 //4: wyjscie
-
-void save(Game_info*);//zapisuje gre
-void save_error(int);//obsluga bledów podczas zapisywania gry
-int load();//zwraca informacje o grze
-void load_error(int);//obsluga bledów podczas wczytywania gry
 //======================================================================================
 
 
@@ -104,8 +101,6 @@ void add_score(int);//dodaje nowy score
 //======================================================================================
 
 
-
-
 void menu_check();
-void end_game();//jezeli bedziecie robili malloc/calloc to ta funkcja powinna zawierac free
-void start_game();//jezeli potrzebujecie cos zaimplikowac na poczatku - tu jest miejsce dla tego
+void end_game();
+void start_game();

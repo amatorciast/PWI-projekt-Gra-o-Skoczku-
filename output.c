@@ -10,12 +10,6 @@
 #include <stdio.h>
 #include "lib.h"
 
-void windows_dzialaj();
-void wsadzanie_przeciwnikow_na_plansze(char[8][8]);
-void wsadzanie_ruchu_przeciwnikow(char[8][8]);
-void obliczanie_mozliwych_ruchow(char[8][8]);
-
-
 char* klocki[32]={ //tablica z klockami do budowy planszy:
     "🭗 ",
     "🬼 ",
@@ -60,8 +54,6 @@ char* kolory[6]={ //tablica ze wszystkimi kolorkami:
     ""
 };
 
-
-
 void set_output()
 {
     windows_dzialaj();
@@ -72,22 +64,12 @@ void set_output()
     char ruchy [8][8]={0};
     obliczanie_mozliwych_ruchow(ruchy);
 
-
     //usuwanie tego co bylo w terminalu
     printf("\e[1;1H\e[2J\e[3J");
-
-    /*obczajanie rozmiaru terminala
-    struct winsize w;
-    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-    int odstep = (w.ws_col - 8*8) / 2;
-    if (odstep < 0) odstep=0;
-    */
-
 
     //petla co wypisuje plansze
     for (int i=0; i<32;i++)
     {
-        //printf("%*s ", odstep, klocki[17]);
         for (int k=0;k<8;k++)
         {
             if(i%4==0 || i%4==3)
@@ -99,12 +81,7 @@ void set_output()
         }
         printf("\n");
     }
-    //sleep(1);
 }
-
-
-//pomysly do uwzglednienia:
-//jak szybko skoncze - animacja?? wyswietla sie najpierw plansza z samymi figurami, potem dodatkowo gdzie celuja przeciwnicy, a na koniec gdzie moze skoczyc skoczek
 
 
 //funkcje pomocnicze:

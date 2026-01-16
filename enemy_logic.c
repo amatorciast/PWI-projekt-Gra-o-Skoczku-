@@ -3,12 +3,14 @@
 #include <stdio.h>
 #include <time.h>
 
-//Game_info game;
+void enemy_death(int indx) {
+    game.enemies[indx].alive = 0;
+}
 
 void enemy_init() {
     srand(time(NULL));
     for (int i = 0; i < 64; i++) {
-        game.enemies[i].alive = 0;
+        enemy_death(i);
     }
 }
 
@@ -41,13 +43,9 @@ void enemy_deside_if_to_bother_living(int score) {
     if (game.difficulty >= 300) enemy_spawn();
 }
 
-void enemy_death(int indx) {
-    game.enemies[indx].alive = 0;
-}
-
 void check_for_death() {
     for (int i = 0; i < 64; i ++) {
-        if (game.enemies[i].alive) {
+        if (game.enemies[i].alive == 1) {
             if (game.enemies[i].curr_x == game.x && game.enemies[i].curr_y == game.y) {
                 zgon();
                 return;
@@ -122,22 +120,3 @@ void enemy_move() {
         }
     }
 }
-
-//poniżej test i proof of concept, że działa
-//WAŻNE! dla testów odkomentuj deklarację Game_info game; w 6
-
-/*
-int main() {
-    enemy_init();
-    char order;
-    while (scanf(" %c", &order)) {
-        if (order == 't') {
-            enemy_move();
-            
-            set_output(); //teraz mozna testowac i logike przeciwnikow i output
-
-        } else if (order == 's') {
-            enemy_spawn();
-        }
-    }
-} */
