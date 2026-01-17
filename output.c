@@ -3,7 +3,6 @@
     #define sleep(ms) Sleep(ms*1000)
 #else
     #include <sys/ioctl.h>
-    #include <unistd.h>
     #define sleep(ms) sleep(ms)
 #endif
 

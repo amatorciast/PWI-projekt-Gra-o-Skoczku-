@@ -35,6 +35,7 @@ void enemy_spawn() {
 }
 
 void enemy_deside_if_to_bother_living(int score) {
+    score=score;
     game.since_last_enemy++;
     game.difficulty += 1;
     

@@ -53,9 +53,11 @@ int load(Game_info* game) {
         return 0;
     }
     // wczytywanie enemies
+    int temp_alive;
     for(int i = 0; i < 64; i++){
         enemy* e = &game->enemies[i];
-        fscanf(file, "%d %d %d %d %d %d", &e->alive, &e->curr_x, &e->curr_y, &e->next_x, &e->next_y, &e->figure);
+        fscanf(file, "%d %d %d %d %d %d", &temp_alive, &e->curr_x, &e->curr_y, &e->next_x, &e->next_y, &e->figure);
+        e->alive = (bool)temp_alive;
     }
     // wczytywanie x, y; is_started; score; since_last_enemy; difficulty
     fscanf(file, "%d %d %d %d %d %d", &game->x, &game->y, &game->is_started, &game->score, &game->since_last_enemy, &game->difficulty);
