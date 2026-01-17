@@ -79,9 +79,34 @@ void enemy_move() {
                 game.enemies[i].next_y = game.enemies[i].curr_y + 1;
             } else if (game.enemies[i].figure == 1) {
                 //wieza
-                if (rand()%2 == 0) game.enemies[i].next_x = game.enemies[i].curr_x + (rand()%15) - 8;
-                else game.enemies[i].next_y = game.enemies[i].curr_y + (rand()%15) - 8;
- 
+                    if(game.difficulty <= 50){//losowe ruchy
+                        if (rand()%2 == 0) game.enemies[i].next_x = game.enemies[i].curr_x + (rand()%15) - 8;
+                        else game.enemies[i].next_y = game.enemies[i].curr_y + (rand()%15) - 8;
+                    } else if(game.difficulty <= 100){//wieża wchodzi na wspólną linię z naszym skoczkiem. Jeżeli już na niej jest to jest 50% szans, że zbije skoczka
+                        if (rand()%2 == 0) game.enemies[i].next_x = game.x;
+                        else game.enemies[i].next_y = game.y;                          
+                    } else if(game.difficulty <= 150){//jeżeli wieża nie jest na wspólnej lini ze skoczkiem to na nią wchodzi. Jeżeli jest na wspólnej lini to na 75% zbije skoczka
+                        if (rand()%2 == 0){
+                            if (rand()%2 == 0) game.enemies[i].next_x = game.x;
+                            else game.enemies[i].next_y = game.y;                              
+                        } else{
+                            if(game.enemies[i].next_x == game.x) game.enemies[i].next_y = game.y;
+                            else if(game.enemies[i].next_y == game.y) game.enemies[i].next_x = game.x;
+                            else{
+                                if (rand()%2 == 0) game.enemies[i].next_x = game.x;
+                                else game.enemies[i].next_y = game.y;                                   
+                            }
+                        }     
+                    } else{//wieża zawsze dąży do zbicia skoczka
+                        if(game.enemies[i].next_x == game.x) game.enemies[i].next_y = game.y;
+                        else if(game.enemies[i].next_y == game.y) game.enemies[i].next_x = game.x;
+                        else{
+                            if (rand()%2 == 0) game.enemies[i].next_x = game.x;
+                            else game.enemies[i].next_y = game.y;                              
+                        }                   
+                    }
+
+                    
             } else if (game.enemies[i].figure == 2) {
                 //skoczek
                 int temp_x = rand() % 2;
@@ -101,7 +126,7 @@ void enemy_move() {
                 
             } else if (game.enemies[i].figure == 3) {
                 //biskup
-                int temp = rand() % 8;
+                int temp = rand() % 4; //zamieniłem 8 na 4, bo jak jest 8 to szansa na to, że goniec zostanie na planszy i zrobi pożytek dla przeciwników jest bardzo mała
                 if (rand()%2 == 1) temp *= -1;
                 game.enemies[i].next_x = game.enemies[i].curr_x + temp;
                 if (rand()%2 == 1) temp *= -1;
