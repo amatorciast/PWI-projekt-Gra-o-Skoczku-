@@ -42,6 +42,7 @@ void set_terminal();//ustawienie terminalu
 int get_input();//zwraca to co wpisał gracz
 //0-8: osiem standardowych ruchów skoczka + zostanie w miejscu
 //9: pauza
+void show_instructions();
 //======================================================================================
 
 

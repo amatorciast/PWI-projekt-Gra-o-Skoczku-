@@ -33,10 +33,10 @@ int pause() {
 
 int menu() {
     printf("\e[1;1H\e[2J\e[3J");
-    printf("Wybierz opcję:\n0: start\n1: zapisz\n2: wczytaj\n3: wypisz wynik\n4: zakończ\n");
+    printf("Wybierz opcję:\n0: start\n1: zapisz\n2: wczytaj\n3: wypisz wynik\n4: zakończ\n5: instrukcja\n");
     int order;
     while(1) {
-        if (scanf(" %d", &order) && (order == 0 || order == 1 || order == 2 || order == 3 || order == 4)) return order;
+        if (scanf(" %d", &order) && (order == 0 || order == 1 || order == 2 || order == 3 || order == 4 || order == 5)) return order;
     }
     return -1;
     //działa tylko 0 i 4 - reszta to nie moja działka

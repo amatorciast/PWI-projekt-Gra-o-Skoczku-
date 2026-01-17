@@ -25,5 +25,9 @@ void menu_check(){
             case 4:
             end_game();
             break;
+
+            case 5:
+            show_instructions();
+            break;
         }
 }
