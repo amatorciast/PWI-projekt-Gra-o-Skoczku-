@@ -25,6 +25,7 @@ typedef struct{
     int score; //wynik gracza
     int since_last_enemy; //licznik rund od ostatniego pojawienia się nowego przeciwnika
     int difficulty; // poziom trudności rosnący wraz z liczbą przeżytych rund
+    int score_list[10];
 }Game_info;
 
 extern Game_info game;
@@ -102,7 +103,9 @@ int menu();//podaje dostep dla uzytkowmika do funkcyj:
 
 //--------------------------------------------------------------------------------------
 void print_score();//zwraca liste int ze scorami z ostatnich podejsc
-void add_score(int);//dodaje nowy score
+void add_score(int, int *);//dodaje nowy score
+void enemy_death_score(int); //dodaje punkty za pokonanie przeciwnika
+void score_list_init(int score_list[10]); //czysci tablice
 //======================================================================================
 
 

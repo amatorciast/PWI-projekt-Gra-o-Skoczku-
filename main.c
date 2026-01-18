@@ -6,6 +6,7 @@ Game_info game;
 
 int main(){
     int input;
+    score_list_init(game.score_list);
     
     game_reset();
 

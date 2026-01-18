@@ -71,8 +71,10 @@ bool player_move(int direction) {
 
     if(is_move_possible == 1){
         for (int i=0; i < 64; i++){
-            if (game.enemies[i].alive == 1  &&  game.enemies[i].curr_x == game.x  &&  game.enemies[i].curr_y == game.y)
+            if (game.enemies[i].alive == 1  &&  game.enemies[i].curr_x == game.x  &&  game.enemies[i].curr_y == game.y) {
+                enemy_death_score(i);
                 enemy_death(i);
+            }
         }
         return 1;
     }

@@ -20,6 +20,10 @@ void save(Game_info* game) {
     // zapisywanie x, y; is_started; score; since_last_enemy; difficulty
     fprintf(file, "%d %d %d %d %d %d \n", game->x, game->y, game->is_started, game->score, game->since_last_enemy, game->difficulty);
 
+    for(int i=0; i<10; i++) {
+        fprintf(file, "%d\n", game->score_list[i]);
+    }
+
     fclose(file);
     printf("Gra zostałą zapisana do pliku %s.\n", file_name);
     printf("wpisz dowolny klawisz aby kontynuować do trwającej gry\n");
@@ -62,6 +66,10 @@ int load(Game_info* game) {
     // wczytywanie x, y; is_started; score; since_last_enemy; difficulty
     fscanf(file, "%d %d %d %d %d %d", &game->x, &game->y, &game->is_started, &game->score, &game->since_last_enemy, &game->difficulty);
 
+    for(int i=0; i<10; i++) {
+        fscanf(file, " %d", &game->score_list[i]);
+    }
+
     fclose(file);
     printf("Gra zostala pomyślnie wczytana z pliku %s.\n", file_name);
     printf("wpisz dowolny klawisz aby kontynuować do wczytanej gry\n");
@@ -83,9 +91,9 @@ void load_error(int error_type){
     }
 }
 
-void print_score() {
-    return;
-}
+// void print_score() {
+//     return;
+// }
 
 void print_score_quick() {
     printf("Score: %d\n", game.score);
@@ -143,6 +151,7 @@ void game_reset() {
 
 int zgon() {
     printf("Doświadczasz śmierci z wynikiem %d.\nWybierz opcję:\n0: zagraj ponownie\n1: menu\n2: zakończ\n", game.score);
+    add_score(game.score, game.score_list);
     game_reset();
     int order;
     while(true) {
