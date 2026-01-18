@@ -65,11 +65,12 @@ int check_for_death() {
 
 void check_for_death_realization(){
     if(check_for_death() == 1) menu_check();
+    else start_game();
     //Jeżeli check_for_death == 1 to:
     //-gracz umarł i w ekranie śmierci wybrał "menu"
     //W przeciwnym wypadku:
     //-gracz nie umarł i gra toczy się dalej
-    //-gracz umarł, ale wybrał "zagraj_ponownie", więc ponieważ gra została zresetowana to nie muszę nic robić
+    //-gracz umarł, ale wybrał "zagraj_ponownie", wtedy muszę ustawić game.is_started na prawdę
 }
 
 void enemy_move() {
