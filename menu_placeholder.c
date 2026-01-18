@@ -19,7 +19,7 @@ void save(Game_info* game) {
     }
     // zapisywanie x, y; is_started; score; since_last_enemy; difficulty
     fprintf(file, "%d %d %d %d %d %d \n", game->x, game->y, game->is_started, game->score, game->since_last_enemy, game->difficulty);
-
+    // zapisywanie score_list
     for(int i=0; i<10; i++) {
         fprintf(file, "%d\n", game->score_list[i]);
     }
@@ -65,7 +65,7 @@ int load(Game_info* game) {
     }
     // wczytywanie x, y; is_started; score; since_last_enemy; difficulty
     fscanf(file, "%d %d %d %d %d %d", &game->x, &game->y, &game->is_started, &game->score, &game->since_last_enemy, &game->difficulty);
-
+    // wczytywanie score_list
     for(int i=0; i<10; i++) {
         fscanf(file, " %d", &game->score_list[i]);
     }
@@ -90,10 +90,6 @@ void load_error(int error_type){
         if (scanf(" %c", &order)) return;
     }
 }
-
-// void print_score() {
-//     return;
-// }
 
 void print_score_quick() {
     printf("Score: %d\n", game.score);
@@ -136,7 +132,6 @@ int menu() {
         }
     }
     return -1;
-    //nie działa tylko 3
 }
 
 void game_reset() {

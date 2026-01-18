@@ -48,7 +48,7 @@ void add_score(int new_score, int *score_list)//dodaje nowy score
         score_list[i]=new_score;
     }
     else {
-        for(int i=0; i>9; i++) {
+        for(int i=0; i<9; i++) {
             score_list[i]=score_list[i+1];
         }
         score_list[9]=new_score;
