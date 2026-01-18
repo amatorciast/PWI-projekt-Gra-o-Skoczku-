@@ -119,14 +119,14 @@ void pause() {
 
 int menu() {
     printf("\e[1;1H\e[2J\e[3J");
-    printf("Wybierz opcję:\n0: start\n1: zapisz\n2: wczytaj\n3: wypisz wynik\n4: zakończ\n");
+    printf("Wybierz opcję:\n0: start\n1: zapisz\n2: wczytaj\n3: wypisz wynik\n4: zakończ\n5: instrukcja\n");
     int order;
     while(true) {
         if (scanf(" %d", &order)){
-            if (order == 0 || order == 1 || order == 2 || order == 3 || order == 4) return order;
-            else printf("Niepoprawna liczba, wybierz liczbę od 0 do 4: ");
+            if (order == 0 || order == 1 || order == 2 || order == 3 || order == 4 || order == 5) return order;
+            else printf("Niepoprawna liczba, wybierz liczbę od 0 do 5: ");
         } else{
-            printf("Nie wprowadziłeś liczby, wybierz liczbę od 0 do 4: ");
+            printf("Nie wprowadziłeś liczby, wybierz liczbę od 0 do 5: ");
             //Jeśli wejście nie jest liczbą to trzeba wyczyścić bufor, bo scanf ciągle próbuje wczytać inta, ciągle mu się to nie udaje, bo w buforze jest inny znak i program utyka w miejscu
             while (getchar() != '\n');
         }

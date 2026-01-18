@@ -5,14 +5,6 @@ bool player_move(int direction) {
     bool is_move_possible = 1;
     switch (direction) {
         case 1:
-        if (game.x >= 1 && game.y <= 6) {
-            game.x --;
-            game.y += 2;
-        }
-        else is_move_possible = 0;
-        break;
-
-        case 2:
         if (game.x >= 2 && game.y <= 6) {
             game.x -= 2;
             game.y ++;
@@ -20,23 +12,39 @@ bool player_move(int direction) {
         else is_move_possible = 0;
         break;
 
-        case 3:
-        if (game.x >= 2 && game.y >= 1) {
-            game.x -= 2;
-            game.y --;
+        case 2:
+        if (game.x >= 1 && game.y <= 6) {
+            game.x --;
+            game.y += 2;
         }
+        else is_move_possible = 0;
+        break;
+
+        case 3:
+        if (game.x <= 6 && game.y <= 5) {
+            game.x ++;
+            game.y += 2;
+        }  
         else is_move_possible = 0;
         break;
 
         case 4:
-        if (game.x >= 1 && game.y >= 2) {
-            game.x --;
-            game.y -= 2;
-        }
+        if (game.x <= 5 && game.y <= 6) {
+            game.x += 2;
+            game.y ++;
+        }  
         else is_move_possible = 0;
         break;
 
         case 5:
+        if (game.x <= 5 && game.y >= 1) {
+            game.x += 2;
+            game.y --;
+        }  
+        else is_move_possible = 0;
+        break;
+
+        case 6:
         if (game.x <= 6 && game.y >= 2) {
             game.x ++;
             game.y -= 2;
@@ -44,26 +52,18 @@ bool player_move(int direction) {
         else is_move_possible = 0;
         break;
 
-        case 6:
-        if (game.x <= 5 && game.y >= 1) {
-            game.x += 2;
-            game.y --;
-        }
-        else is_move_possible = 0;
-        break;
-
         case 7:
-        if (game.x <= 5 && game.y <= 6) {
-            game.x += 2;
-            game.y ++;
+        if (game.x >= 1 && game.y >= 2) {
+            game.x --;
+            game.y -= 2;
         }
         else is_move_possible = 0;
         break;
 
         case 8:
-        if (game.x <= 6 && game.y <= 5) {
-            game.x ++;
-            game.y += 2;
+        if (game.x >= 2 && game.y >= 1) {
+            game.x -= 2;
+            game.y --;
         }
         else is_move_possible = 0;
         break;

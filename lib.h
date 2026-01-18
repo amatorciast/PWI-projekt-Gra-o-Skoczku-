@@ -36,6 +36,7 @@ int get_input();//zwraca to co wpisał gracz
 //0-8: osiem standardowych ruchów skoczka + zostanie w miejscu
 //9: pauza
 void input_error();//obsługuje sytuację, w której gracz próbuje wyjść poza planszę
+void show_instructions();
 //======================================================================================
 
 
