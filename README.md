@@ -7,11 +7,11 @@ Kacper Niebrzydowski, menu/pause/save files
 
 
 zasady ruchu:
-   3   2
- 4       1
-     H    
- 5       8
-   6   7
+   8   1
+ 7       2
+     0    
+ 6       3
+   5   4
 
 0 - przepuścić turę
 p - pause
