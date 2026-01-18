@@ -2,7 +2,6 @@
 #include <stdlib.h>
 
 void end_game(){
-
     exit(0);
 }
 
