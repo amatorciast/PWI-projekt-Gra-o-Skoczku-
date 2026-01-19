@@ -15,9 +15,7 @@ void print_menu(int selection){
     printf(" |____|_|  |__,_|  |___/  |____/|_||_|___/ |___/___|_||_||__,_|\n");
     printf("\n");
     printf("| Start || Save  || Load  || Scores|| Exit  || Inst  |\n");
-    for( int i = 0; i < selection; i++){
-        printf("         ");
-    }
+    for( int i = 0; i < selection; i++) printf("         ");
     printf("^\n");
 }
 void print_pause(int selection){

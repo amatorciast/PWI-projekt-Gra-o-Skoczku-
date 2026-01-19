@@ -35,6 +35,7 @@ void save(Game_info* game) {
 }
 
 void save_error(int error_type){
+    cease();
     // 0 - is_started == 0
     // 1 - błąd otwarcia pliku
     cease();

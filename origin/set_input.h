@@ -7,9 +7,9 @@
 
 //input_0 = przepuscienie tury
 //input_9 = pause
-//input_10 select
-//input_11 lewy
-//input_12 prawy
+//input_10 ui_select
+//input_11 ui_left
+//input_12 ui_right
 
 #define input_0 '0'
 #define input_1 '1'
