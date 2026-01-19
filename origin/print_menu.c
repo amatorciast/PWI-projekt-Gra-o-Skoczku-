@@ -3,9 +3,9 @@
 #include <string.h>
 // sprawdza czy ma uzywac komendy windowsa czy linuxa
 #ifdef _WIN32
-    #define char clear "clr";
+    #define clear "clr";
 #else
-    #define char clear "clear";
+    #define clear "clear";
 void cease() system(clear); // dodalem zeby czyscic screen dla funkcji do ktorych nie bylem na tyle odwazny zeby zmieniac
 void print_menu(int selection){ // zwykle menu
     system(clear);
