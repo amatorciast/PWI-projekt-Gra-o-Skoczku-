@@ -32,3 +32,4 @@ Alan Drab
 Andrei Dzhura
 Jakub Sroka
 Kacper Niebrzydowski
+Natalia Piątek
