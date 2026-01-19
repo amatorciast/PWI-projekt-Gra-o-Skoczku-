@@ -108,7 +108,7 @@ void pause() {
     while(true){
         menu_input  = get_input();
         int menu_update = 0
-        if (menu_input == 0 || menu_input == 1) return menu_input; // sa dwa sposoby na wybranie opcji, standardowe wczesniejsze wcisniecie 1-5 lub nowe "a","d" i spacja 
+        if (menu_input == 0 || menu_input == 1) return menu_input; // sa dwa sposoby na wybranie opcji, standardowe wczesniejsze wcisniecie 0-1 lub nowe "a","d" i spacja 
         if(menu_input == 11  || menu_input == 12){
             menu_update = 1;
             if(selection == 0) selection = 1;
