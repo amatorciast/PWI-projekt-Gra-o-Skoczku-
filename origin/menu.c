@@ -3,6 +3,7 @@
 #include <string.h>
 
 void save(Game_info* game) {
+    cease();
     printf("Podaj nazwę pliku, w którym chcesz zapisać stan gry (maks 64 znaki):\n");
     char file_name[100];
     scanf(" %64s", file_name);
@@ -36,6 +37,7 @@ void save(Game_info* game) {
 void save_error(int error_type){
     // 0 - is_started == 0
     // 1 - błąd otwarcia pliku
+    cease();
     if(error_type == 1) printf("Błąd otwarcia pliku do zapisu\n");
     else printf("Nie ma rozpoczętej gry do zapisania\n");
     printf("Wpisz dowolny klawisz aby kontynuować do poprzedniego widoku\n");
@@ -46,6 +48,7 @@ void save_error(int error_type){
 }
 
 int load(Game_info* game) {
+    cease();
     printf("Podaj nazwę pliku, z którego chcesz wczytać stan gry:\n");
     char file_name[100];
     scanf(" %64s", file_name);
@@ -80,6 +83,7 @@ int load(Game_info* game) {
 }
 
 void load_error(int error_type){
+    cease();
     // 0 - błąd podczas wczytywania pliku
     // 1 - błąd otwarcia pliku
     if(error_type == 1) printf("Błąd podczas otwierania pliku do wczytania. Najprawdopodobniej plik z podaną nazwą nie istnieje\n");
@@ -97,24 +101,21 @@ void print_score_quick() {
 }
 
 void pause() {
-    printf("Wybierz opcję:\n0: resume\n1: menu\n");
-    int order;
-    while(true) {
-        if (scanf(" %d", &order)){
-            if (order == 0)  return;
-            else if (order == 1){
-                menu_check();
-                return;
-            }
-            else printf("Niepoprawna liczba, wybierz 0 lub 1: ");
-        } else{
-            printf("Nie wprowadziłeś liczby, wybierz 0 lub 1: ");
-            //Jeśli wejście nie jest liczbą to trzeba wyczyścić bufor, bo scanf ciągle próbuje wczytać inta, ciągle mu się to nie udaje, bo w buforze jest inny znak i program utyka w miejscu
-            while (getchar() != '\n');
+    int selection = 0;
+    int menu_input;
+    print_pause(selection);
+    while(true){
+        menu_input  = get_input();
+        int menu_update = 0
+        if (menu_input == 0 || menu_input == 1) return menu_input; // sa dwa sposoby na wybranie opcji, standardowe wczesniejsze wcisniecie 1-5 lub nowe "a","d" i spacja 
+        if(menu_input == 11  || menu_input == 12){
+            menu_update = 1;
+            if(selection == 0) selection = 1;
+            else selection = 0;
         }
+        if(menu_update) print_pause(selection);
+        if(menu_input == 10) return selection;
     }
-
-    return;
 }
 
 int menu() {
@@ -124,15 +125,15 @@ int menu() {
     while(true) {
         menu_input  = get_input();
         int menu_update = 0
-        if (menu_input >= 0 && menu_input <= 5) return menu_input; // sa dwa sposoby na wybranie opcji, standardowe wczesniejsze wcisniecie 1-5 lub nowe "a","d" i spacja 
+        if (menu_input >= 0 && menu_input <= 5) return menu_input; 
         if(menu_input == 11){
-            if (selection == 5) selection = 0;
-            else selection++;
+            if (selection == 0) selection = 5;
+            else selection--;
             menu_update = 1;
         }
         if(menu_input == 12){
-            if (selection == 0) selection = 5;
-            else selection--;
+            if (selection == 5) selection = 0;
+            else selection++;
             menu_update = 1;
         }
         if(menu_update) print_menu(selection);
@@ -151,19 +152,27 @@ void game_reset() {
 }
 
 int zgon() {
-    printf("Doświadczasz śmierci z wynikiem %d.\nWybierz opcję:\n0: zagraj ponownie\n1: menu\n2: zakończ\n", game.score);
+    int selection = 0;
+    int menu_input;
+    print_zgon(selection);
     add_score(game.score, game.score_list);
     game_reset();
-    int order;
-    while(true) {
-        if (scanf(" %d", &order)) {
-            if(order == 0 || order == 1) return order;
-            else if(order == 2) end_game();
-            else printf("Niepoprawna liczba, wybierz 0, 1 lub 2: ");
-        } else{
-            printf("Nie wprowadziłeś liczby, wybierz 0, 1 lub 2: ");
-            //Jeśli wejście nie jest liczbą to trzeba wyczyścić bufor, bo scanf ciągle próbuje wczytać inta, ciągle mu się to nie udaje, bo w buforze jest inny znak i program utyka w miejscu
-            while (getchar() != '\n');
+    
+    while(true){
+        menu_input = get_input();
+        int menu_update = 0;
+        if (menu_input >= 0 && menu_input <= 2) return menu_input; 
+        if(menu_input == 11){
+            if (selection == 0) selection = 2;
+            else selection--;
+            menu_update = 1;
         }
+        if(menu_input == 12){
+            if (selection == 2) selection = 0;
+            else selection++;
+            menu_update = 1;
+        }
+        if(menu_update) print_zgon(selection);
+        if(menu_input == 10) return selection;
     }
 }

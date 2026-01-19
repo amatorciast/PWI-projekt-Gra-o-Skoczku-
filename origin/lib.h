@@ -99,6 +99,9 @@ int menu();//podaje dostep dla uzytkowmika do funkcyj:
 //3: wypisuje score
 //4: wyjscie
 void print_menu(int selection);
+void print_pause(int selection);
+void print_zgon(int selection);
+void cease(); // wyczyszca ekran
 //======================================================================================
 
 

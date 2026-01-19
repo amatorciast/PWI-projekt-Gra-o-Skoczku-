@@ -1,5 +1,13 @@
+#include "lib.h"
+#include <stdio.h>
+#include <string.h>
+#ifdef _WIN32
+    #define char clear[] = "clr";
+#else
+    #define char clear[] = "clear";
+void cease() system(clear);
 void print_menu(int selection){
-    system("clear"); // Nie jestem pewien jak wyczyszczacie screen w reszcie projektu,
+    system(clear);
     printf("  ____                     ____  _                  _          \n");
     printf(" / ___|_ __ __ _    ___   / ___|| | _____   ___ ___| | ___   _  \n ");
     printf("| |  _| '__/ _` |  / _ |  |___ || |/ / _ | / __|_  / |/ / | |  |\n");
@@ -11,4 +19,29 @@ void print_menu(int selection){
         printf("         ");
     }
     printf("^\n");
+}
+void print_pause(int selection){
+    system(clear);
+    printf(" ____                          _ \n");
+    printf("|  _ | __ _ _   _ ___  ___  __| |\n");
+    printf("| |_) / _` | | | / __|/ _ |/ _` |\n");
+    printf("|  __/ (_| | |_| |__ |  __/ (_| |\n");
+    printf("|_|   |__,_| |__,_|___/|___||__,_|\n");
+    printf("\n");
+    printf("|Resume||Menu|\n");
+    if (selection == 1) printf("        ^\n");
+    else printf("^\n");
+}
+void print_zgon(int selection){
+    system(clear);
+    printf(" ____             _   _     \n");
+    printf("|  _ |  ___  __ _| |_| |__  \n");
+    printf("| | | |/ _ |/ _` | __| '_ | \n");
+    printf("| |_| |  __/ (_| | |_| | | |\n");
+    printf("|____/ |___||__,_||__|_| |_|\n");
+    printf("\n");
+    printf("Uzyskano score: %d \n", game.score);
+    printf("|Reset||Menu || End |\n");
+    for(int i = 0; i < selection;i++) printf("       ");
+    printf("^\n"); 
 }
