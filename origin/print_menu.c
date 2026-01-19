@@ -1,12 +1,13 @@
 #include "lib.h"
 #include <stdio.h>
 #include <string.h>
+// sprawdza czy ma uzywac komendy windowsa czy linuxa
 #ifdef _WIN32
     #define char clear[] = "clr";
 #else
     #define char clear[] = "clear";
-void cease() system(clear);
-void print_menu(int selection){
+void cease() system(clear); // dodalem zeby czyscic screen dla funkcji do ktorych nie bylem na tyle odwazny zeby zmieniac
+void print_menu(int selection){ // zwykle menu
     system(clear);
     printf("  ____                     ____  _                  _          \n");
     printf(" / ___|_ __ __ _    ___   / ___|| | _____   ___ ___| | ___   _  \n ");
@@ -14,11 +15,12 @@ void print_menu(int selection){
     printf("| |_| | | | (_| | | (_) |  ___) |   < (_) | (__ / /|   <| |_|  |\n");
     printf(" |____|_|  |__,_|  |___/  |____/|_||_|___/ |___/___|_||_||__,_|\n");
     printf("\n");
+    // napisane w paru printf zamiast jednego dla latwiejszej czytelnosci kodu
     printf("| Start || Save  || Load  || Scores|| Exit  || Inst  |\n");
-    for( int i = 0; i < selection; i++) printf("         ");
+    for( int i = 0; i < selection; i++) printf("         "); // sprawdza na jakim selection jestesmy i przesuwa o tyle
     printf("^\n");
 }
-void print_pause(int selection){
+void print_pause(int selection){ // menu pause
     system(clear);
     printf(" ____                          _ \n");
     printf("|  _ | __ _ _   _ ___  ___  __| |\n");
@@ -30,7 +32,7 @@ void print_pause(int selection){
     if (selection == 1) printf("        ^\n");
     else printf("^\n");
 }
-void print_zgon(int selection){
+void print_zgon(int selection){ // menu posmiertne
     system(clear);
     printf(" ____             _   _     \n");
     printf("|  _ |  ___  __ _| |_| |__  \n");

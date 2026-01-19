@@ -101,7 +101,7 @@ void print_score_quick() {
     return;
 }
 
-void pause() {
+void pause() { // opcje to resume i menu
     int selection = 0;
     int menu_input;
     print_pause(selection);
@@ -109,17 +109,17 @@ void pause() {
         menu_input  = get_input();
         int menu_update = 0
         if (menu_input == 0 || menu_input == 1) return menu_input; // sa dwa sposoby na wybranie opcji, standardowe wczesniejsze wcisniecie 0-1 lub nowe "a","d" i spacja 
-        if(menu_input == 11  || menu_input == 12){
+        if(menu_input == 11  || menu_input == 12){ // przez to ze sa tylko dwie opcje nie ma znaczenia ktory z nich byl wcisniety
             menu_update = 1;
             if(selection == 0) selection = 1;
             else selection = 0;
         }
-        if(menu_update) print_pause(selection);
-        if(menu_input == 10) return selection;
+        if(menu_update) print_pause(selection); // wyczyscza i znowu wypisuje ekran tylko wtedy kiedy odczytal zmiane
+        if(menu_input == 10) return selection; 
     }
 }
 
-int menu() {
+int menu() { // opcje to start, save, load, scores, exit i instructions
     int selection = 0;
     int menu_input;
     print_menu(selection);
@@ -152,7 +152,7 @@ void game_reset() {
     game.difficulty = 0;
 }
 
-int zgon() {
+int zgon() { // opcje to restart, menu i zakoncz
     int selection = 0;
     int menu_input;
     print_zgon(selection);
