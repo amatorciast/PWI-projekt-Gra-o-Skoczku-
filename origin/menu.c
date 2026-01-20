@@ -29,7 +29,7 @@ void save(Game_info* game) {
     printf("Gra zostałą zapisana do pliku %s.\n", file_name);
     printf("wpisz dowolny klawisz aby kontynuować do trwającej gry\n");
     char order;
-    while(true) {
+    while(1) {
         if (scanf(" %c", &order)) return;
     }
 }
@@ -43,7 +43,7 @@ void save_error(int error_type){
     else printf("Nie ma rozpoczętej gry do zapisania\n");
     printf("Wpisz dowolny klawisz aby kontynuować do poprzedniego widoku\n");
     char order;
-    while(true) {
+    while(1) {
         if (scanf(" %c", &order)) return;
     }
 }
@@ -78,7 +78,7 @@ int load(Game_info* game) {
     printf("Gra zostala pomyślnie wczytana z pliku %s.\n", file_name);
     printf("wpisz dowolny klawisz aby kontynuować do wczytanej gry\n");
     char order;
-    while(true) {
+    while(1) {
         if (scanf(" %c", &order)) return 1;
     }
 }
@@ -91,7 +91,7 @@ void load_error(int error_type){
     else printf("Błąd podczas wczytywania zawartości pliku\n");
     printf("wpisz dowolny klawisz aby kontynuować do poprzedniego widoku\n");
     char order;
-    while(true) {
+    while(1) {
         if (scanf(" %c", &order)) return;
     }
 }
@@ -105,17 +105,23 @@ void pause() { // opcje to resume i menu
     int selection = 0;
     int menu_input;
     print_pause(selection);
-    while(true){
+    while(1){
         menu_input  = get_input();
-        int menu_update = 0
-        if (menu_input == 0 || menu_input == 1) return menu_input; // sa dwa sposoby na wybranie opcji, standardowe wczesniejsze wcisniecie 0-1 lub nowe "a","d" i spacja 
+        int menu_update = 0;
+        if (menu_input == 0 || menu_input == 1){
+            if (menu_input == 1 ) menu_check();
+            return;
+        }
         if(menu_input == 11  || menu_input == 12){ // przez to ze sa tylko dwie opcje nie ma znaczenia ktory z nich byl wcisniety
             menu_update = 1;
             if(selection == 0) selection = 1;
             else selection = 0;
         }
         if(menu_update) print_pause(selection); // wyczyscza i znowu wypisuje ekran tylko wtedy kiedy odczytal zmiane
-        if(menu_input == 10) return selection; 
+        if(menu_input == 10){
+            if (selection == 1) menu_check();
+            return;
+        } 
     }
 }
 
@@ -123,9 +129,9 @@ int menu() { // opcje to start, save, load, scores, exit i instructions
     int selection = 0;
     int menu_input;
     print_menu(selection);
-    while(true) {
+    while(1) {
         menu_input  = get_input();
-        int menu_update = 0
+        int menu_update = 0;
         if (menu_input >= 0 && menu_input <= 5) return menu_input; 
         if(menu_input == 11){
             if (selection == 0) selection = 5;
@@ -159,7 +165,7 @@ int zgon() { // opcje to restart, menu i zakoncz
     add_score(game.score, game.score_list);
     game_reset();
     
-    while(true){
+    while(1){
         menu_input = get_input();
         int menu_update = 0;
         if (menu_input >= 0 && menu_input <= 2) return menu_input; 

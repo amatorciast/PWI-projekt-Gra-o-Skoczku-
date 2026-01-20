@@ -3,12 +3,16 @@
 #include <string.h>
 // sprawdza czy ma uzywac komendy windowsa czy linuxa
 #ifdef _WIN32
-    #define clear "clr";
+    #define CLEAR_CMD "cls"
 #else
-    #define clear "clear";
-void cease() system(clear); // dodalem zeby czyscic screen dla funkcji do ktorych nie bylem na tyle odwazny zeby zmieniac
+    #define CLEAR_CMD "clear"
+#endif
+
+void cease(){
+    system(CLEAR_CMD);
+} // dodalem zeby czyscic screen dla funkcji do ktorych nie bylem na tyle odwazny zeby zmieniac
 void print_menu(int selection){ // zwykle menu
-    system(clear);
+    cease();
     printf("  ____                     ____  _                  _          \n");
     printf(" / ___|_ __ __ _    ___   / ___|| | _____   ___ ___| | ___   _  \n ");
     printf("| |  _| '__/ _` |  / _ |  |___ || |/ / _ | / __|_  / |/ / | |  |\n");
@@ -21,7 +25,7 @@ void print_menu(int selection){ // zwykle menu
     printf("^\n");
 }
 void print_pause(int selection){ // menu pause
-    system(clear);
+    cease();
     printf(" ____                          _ \n");
     printf("|  _ | __ _ _   _ ___  ___  __| |\n");
     printf("| |_) / _` | | | / __|/ _ |/ _` |\n");
@@ -33,7 +37,7 @@ void print_pause(int selection){ // menu pause
     else printf("^\n");
 }
 void print_zgon(int selection){ // menu posmiertne
-    system(clear);
+    cease();
     printf(" ____             _   _     \n");
     printf("|  _ |  ___  __ _| |_| |__  \n");
     printf("| | | |/ _ |/ _` | __| '_ | \n");
