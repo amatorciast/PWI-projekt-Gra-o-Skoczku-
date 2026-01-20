@@ -25,6 +25,7 @@ p – pauza
 
 Aby zmienić sterowanie, należy edytować plik set_input.h i zmienić przypisane znaki.
 
+w menu mozna poruszac sie 'a' i 'd', i wybrac opcje spacja. lub tez mozna wpisac numer opcji liczac od 0.
 
 Twórcy:
 Gabriel Miś
