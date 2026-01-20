@@ -26,6 +26,12 @@ int get_input(){
         return 8;
         case input_9:
         return 9;
+        case input_10:
+        return 10;
+        case input_12:
+        return 11;
+        case input_12:
+        return 12;
     }
     return -1; //nieprawidłowy input
 }
