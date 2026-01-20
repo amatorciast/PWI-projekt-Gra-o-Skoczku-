@@ -25,7 +25,7 @@ void print_menu(int selection){ // zwykle menu
     printf("^\n");
 }
 void print_pause(int selection){ // menu pause
-    cease()
+    cease();
     printf(" ____                          _ \n");
     printf("|  _ | __ _ _   _ ___  ___  __| |\n");
     printf("| |_) / _` | | | / __|/ _ |/ _` |\n");
