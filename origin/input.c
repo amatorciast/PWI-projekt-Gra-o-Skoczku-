@@ -28,7 +28,7 @@ int get_input(){
         return 9;
         case input_10:
         return 10;
-        case input_12:
+        case input_11:
         return 11;
         case input_12:
         return 12;
