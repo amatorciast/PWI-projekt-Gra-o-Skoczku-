@@ -19,3 +19,6 @@
 #define input_7 '7'
 #define input_8 '8'
 #define input_9 'p'
+#define input_10 ' '
+#define input_11 'a'
+#define input_12 'd'
